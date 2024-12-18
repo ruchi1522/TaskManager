@@ -1,0 +1,83 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.search-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+.search-field {
+  width: 250px;
+  margin-right: 10px;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+}
+
+
+.task-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 10px;
+  text-align: left;
+}
+
+th.mat-header-cell {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 5px;
+}
+
+.completed {
+  background-color: #e0ffe0;
+}
+
+.disabled-row {
+  background-color: #e0ffe0;
+  color: #888;
+}
+
+mat-checkbox[disabled] {
+  background-color: #f0f0f0;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .task-table {
+    font-size: 14px;
+  }
+
+  .task-table th, .task-table td {
+    padding: 8px;
+  }
+  
+}
