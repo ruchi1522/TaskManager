@@ -3,12 +3,12 @@ export interface Task {
   title: string;
   description: string;
   deadline: string;
-  isCompleted: boolean;
+  is_completed: boolean;
 }
 
 export interface TaskCreate {
   title: string;
   description: string;
   deadline: string;
-  isCompleted: boolean;
+  is_completed: boolean;
 }

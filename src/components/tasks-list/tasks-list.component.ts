@@ -13,10 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { loadTasks } from '../../action/tasks.actions';
+import { loadTasks, updateTask } from '../../action/tasks.actions';
 import { Task } from '../../model/task.model';
 import { selectAllTasks } from '../../selector/tasks.selectors';
-import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tasks-list',
@@ -33,13 +33,14 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     FormsModule,
   ],
+  providers: [DatePipe],
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],
 })
 export class TasksListComponent implements OnInit {
   searchQuery: string = '';
   tasks$: Observable<Task[]>;
-
+  isDialogOpen: boolean = false;
   displayedColumns: string[] = [
     'title',
     'description',
@@ -67,11 +68,21 @@ export class TasksListComponent implements OnInit {
   }
 
   addTask() {
-    const dialogRef = this.dialog.open(AddTaskDialogComponent);
+    if (!this.isDialogOpen) {
+      this.isDialogOpen = true; // Mark dialog as open
+      const dialogRef = this.dialog.open(AddTaskDialogComponent);
+
+      dialogRef.afterClosed().subscribe((result) => {
+        this.isDialogOpen = false; // Mark dialog as closed when it is closed
+        if (result) {
+          this.store.dispatch(loadTasks());
+        }
+      });
+    }
   }
 
   onCompletionToggle(task: Task) {
-    console.log('Task completion toggled', task);
-    task.isCompleted = !task.isCompleted;
+    const updatedTask = { ...task, is_completed: !task.is_completed };
+    this.store.dispatch(updateTask({ task: updatedTask }));
   }
 }

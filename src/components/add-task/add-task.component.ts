@@ -34,7 +34,7 @@ export class AddTaskDialogComponent {
     title: '',
     description: '',
     deadline: '',
-    isCompleted: false,
+    is_completed: false,
   };
 
   constructor(

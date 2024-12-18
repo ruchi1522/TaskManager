@@ -25,5 +25,9 @@ export class ApiService {
   addTask(task: TaskCreate): Observable<any> {
     return this.http.post(`${this.apiUrl}/tasks/`, task);
   }
+
+  updateTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${task.id}/`, task);
+  }
 }
 export type { Task };

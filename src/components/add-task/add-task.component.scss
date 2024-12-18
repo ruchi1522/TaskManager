@@ -1,1 +1,25 @@
-.full-width { width: 100%; margin-top: 10px; }
+.mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .mat-form-field input,
+  .mat-form-field textarea {
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+  
+  .mat-form-field .mat-label {
+    position: absolute;
+    top: -8px;
+  }
+  
+  .mat-form-field.mat-focused .mat-label {
+    top: -12px;
+  }
+  
+  .mat-form-field input:focus,
+  .mat-form-field textarea:focus {
+    padding-top: 18px;
+  }
+  

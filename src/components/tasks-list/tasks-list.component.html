@@ -5,7 +5,7 @@
   <mat-toolbar class="search-toolbar">
     <mat-form-field appearance="fill" class="search-field">
       <mat-label>Search Tasks</mat-label>
-      <input matInput [(ngModel)]="searchQuery" placeholder="Search tasks" />
+      <input matInput [(ngModel)]="searchQuery" placeholder="Search tasks title" />
     </mat-form-field>
     <div class="add-button">
       <button mat-icon-button (click)="addTask()" matTooltip="Add Task" matTooltipPosition="below" color="primary">
@@ -19,30 +19,32 @@
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef> Task Title </th>
-      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed': task.isCompleted }">
+      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed ': task.is_completed  }">
         {{ task.title }}
       </td>
     </ng-container>
   
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed': task.isCompleted }">
+      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed ': task.is_completed  }">
         {{ task.description }}
       </td>
     </ng-container>
     
     <ng-container matColumnDef="deadline">
       <th mat-header-cell *matHeaderCellDef> Deadline </th>
-      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed': task.isCompleted }">
-        {{ task.deadline }}
+      <td mat-cell *matCellDef="let task" [ngClass]="{ 'completed ': task.is_completed  }">
+        {{ task.deadline | date: 'dd-MM-yyyy' }}
       </td>
     </ng-container>
   
     <ng-container matColumnDef="completed">
       <th mat-header-cell *matHeaderCellDef> Mark as Completed </th>
       <td mat-cell *matCellDef="let task">
-        <mat-checkbox [(ngModel)]="task.isCompleted" (change)="onCompletionToggle(task)" 
-                      [disabled]="task.isCompleted">
+        <mat-checkbox
+          [checked]="task.is_completed"
+          (change)="onCompletionToggle(task)"
+          [disabled]="task.is_completed">
         </mat-checkbox>
       </td>
     </ng-container>
@@ -50,8 +52,8 @@
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
-        [ngClass]="{ 'completed': row.isCompleted }" 
-        [class.disabled-row]="row.isCompleted">
+        [ngClass]="{ 'completed ': row.is_completed  }" 
+        [class.disabled-row]="row.is_completed ">
     </tr>
   
   </table>

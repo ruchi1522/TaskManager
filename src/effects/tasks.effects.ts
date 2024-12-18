@@ -7,7 +7,11 @@ import {
   loadTasks,
   loadTasksSuccess,
   loadTasksFailure,
+  updateTask,
+  updateTaskSuccess,
+  updateTaskFailure,
 } from '../action/tasks.actions';
+import { Task } from '../model/task.model';
 
 @Injectable()
 export class TasksEffects {
@@ -23,6 +27,18 @@ export class TasksEffects {
             console.error('Error fetching tasks:', error);
             return of(loadTasksFailure({ error }));
           })
+        )
+      )
+    )
+  );
+
+  updateTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateTask),
+      mergeMap(({ task }) =>
+        this.apiService.updateTask(task).pipe(
+          map((updatedTask: Task) => updateTaskSuccess({ task: updatedTask })),
+          catchError((error) => of(updateTaskFailure({ error })))
         )
       )
     )

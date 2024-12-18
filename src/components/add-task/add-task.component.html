@@ -7,10 +7,11 @@
         <input matInput [(ngModel)]="taskData.title" />
       </mat-form-field>
     </div>
+
     <div fxFlex="100%">
       <mat-form-field appearance="outline" class="form-field full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput [(ngModel)]="taskData.description"></textarea>
+        <textarea matInput [(ngModel)]="taskData.description" matTextareaAutosize></textarea>
       </mat-form-field>
     </div>
     <div fxFlex="100%">
